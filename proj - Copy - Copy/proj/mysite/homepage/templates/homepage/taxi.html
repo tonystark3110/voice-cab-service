@@ -1,0 +1,44 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <body onmousedown = "SendPostRequestHome(event)">
+	<font color="white">
+	<div class="any">
+	<center>
+	<br><b><u><h1 class="display-3 font-weight-bold"> <center><i><b>Welcome to taxi section </b> </i></center></h1> 
+	</u></b><br>
+	<br><br><h1 class="display-4" ></h1><br>
+	<ul style="list-style-type:none; font-size:24px;">
+	<h2><center><i> Name the destination place </i></center></h2>
+	<h2><center><i>       Phone number</i></center></h2>
+	<h2><center><i>       OTP</i></center></h2>
+	
+	</ul>
+	<br><br><br>
+	<h1 class="display-2 font-weight-bold" style="font-size:30px;">Let's Start ...</h1>
+	</center>
+	</font>
+	<!--<div class="page">
+		<h2>Log In</h2>
+		<form class="site-form" action="{% url 'homepage:login' %}" method="post">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="col-sm-6">
+					{{ field.label_tag }} - {{ field }}
+				</div>
+			{% endfor %}
+			<input type="submit" value="Login">
+		</form>
+	</div>-->
+	
+<script>
+		function SendPostRequestHome(event){
+			$.ajax({
+			url: "{% url 'homepage:taxi' %}",
+			method: 'POST',
+			data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+			
+		});;
+		}
+		</script>
+    {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+	<body onmousedown = "SendPostRequestOptions(event)">
+	<font color="white">
+	<div class="any">
+    <h1></h1><br>
+    <br><br><br><h1><center> <i><b>What would you like to do? </b></i></center></h1><br><br><br>
+
+	<h2><center><i>1. To access email say email</i></center></h2><br>
+	<h2><center><i>2. To check map say direction</i></center></h2><br>
+	<h2><center><i>3. To book taxi say taxi</i></center></h2><br>
+	
+	
+	<script>
+	function SendPostRequestOptions(event){
+		$.ajax({
+        url: "{% url 'homepage:menu' %}",
+        method: 'POST',
+        data: { 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+        success: function (data) {
+			if(data.result == 'login'){
+				window.location = "{% url 'homepage:login' %}";
+			}
+			else if(data.result == 'direction'){
+				window.location = "{% url 'homepage:map' %}";
+			}	
+			else if(data.result == 'taxi'){
+				window.location = "{% url 'homepage:taxi' %}";
+			}	
+			
+        }
+    });
+	}
+	</script>
+
+{% endblock %}
